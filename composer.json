@@ -1,0 +1,27 @@
+{
+    "name": "Caparica",
+    "type": "library",
+    "version": "0.0.1",
+    "description": "secure your REST api with signed requests",
+    "keywords": ["REST", "API", "secure", "hmac"],
+    "homepage": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nuno Costa",
+            "email": "nuno@francodacosta.com",
+            "homepage": "http://www.francodacosta.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "symfony/yaml": "dev-master"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Caparica": "src/"
+        }
+    }
+
+}
