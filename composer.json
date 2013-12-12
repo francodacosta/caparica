@@ -1,5 +1,5 @@
 {
-    "name": "Caparica",
+    "name": "francodacosta/caparica",
     "type": "library",
     "description": "secure your REST api with signed requests",
     "keywords": ["REST", "API", "secure", "hmac"],
