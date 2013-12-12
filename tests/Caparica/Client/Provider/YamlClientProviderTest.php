@@ -9,7 +9,7 @@ class YamlClientProviderTest extends \PHPUnit_Framework_TestCase
     {
         $file = __DIR__ . '/../../../fixtures/api-clients.yml';
         $yaml = new Symfony\Component\Yaml\Yaml;
-        $class = 'Caparica\Client\BasicApiClient';
+        $class = 'Caparica\Client\BasicClient';
 
         $provider = new YamlClientProvider($file, $yaml, $class );
 
@@ -42,7 +42,7 @@ class YamlClientProviderTest extends \PHPUnit_Framework_TestCase
     {
         $file = __DIR__ . 'dsfsdfdasfdasfdasfdasf';
         $yaml = new Symfony\Component\Yaml\Yaml;
-        $class = 'Caparica\Client\BasicApiClient';
+        $class = 'Caparica\Client\BasicClient';
 
         $provider = new YamlClientProvider($file, $yaml, $class );
         $client = $provider->byCode(time());

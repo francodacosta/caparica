@@ -5,7 +5,7 @@ namespace Caparica\Client;
 /**
  * Apiclient
  */
-class BasicApiClient implements ClientInterface
+class BasicClient implements ClientInterface
 {
 
 

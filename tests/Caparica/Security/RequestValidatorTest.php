@@ -12,7 +12,7 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $file = __DIR__ . '/../../fixtures/api-clients.yml';
         $yaml = new Symfony\Component\Yaml\Yaml;
-        $class = 'Caparica\Client\BasicApiClient';
+        $class = 'Caparica\Client\BasicClient';
 
         $clientProvider = new YamlClientProvider($file, $yaml, $class);
 

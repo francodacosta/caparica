@@ -1,7 +1,7 @@
 <?php
-use Caparica\Client\BasicApiClient;
+use Caparica\Client\BasicClient;
 
-class BasicApiClientTest extends \PHPUnit_Framework_TestCase
+class BasicClientTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp()
@@ -12,7 +12,7 @@ class BasicApiClientTest extends \PHPUnit_Framework_TestCase
 
     public function testClient()
     {
-        $client = new BasicApiClient;
+        $client = new BasicClient;
 
         $client->setCode('1234');
         $client->setSecret('secret');

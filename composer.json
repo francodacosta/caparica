@@ -1,7 +1,6 @@
 {
     "name": "Caparica",
     "type": "library",
-    "version": "0.0.1",
     "description": "secure your REST api with signed requests",
     "keywords": ["REST", "API", "secure", "hmac"],
     "homepage": "",
