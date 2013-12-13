@@ -15,7 +15,7 @@ class RequestSigner implements SignerInterface
     public function sign (array $params, $password)
     {
         $string = $this->toParametersString($params);
-
+error_log('signing string: ' . $string);
         return hash_hmac('sha256', $string, $password);
     }
 
@@ -29,7 +29,7 @@ class RequestSigner implements SignerInterface
      */
     private function toParametersString(array $params)
     {
-        ksort($params);
+        ksort($params, SORT_NATURAL | SORT_FLAG_CASE);
 
         $keyValue = array_map(
             function ($key, $value) {

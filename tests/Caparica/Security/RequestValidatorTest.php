@@ -54,7 +54,7 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
             'b'               => 'ewq',
         );
 
-        $urlToSign = 'X-CAPARICA-DATE='. $timestamp .'&a=bcd&b=ewq&c=123';
+        $urlToSign = 'a=bcd&b=ewq&c=123&X-CAPARICA-DATE='. $timestamp;
         $requestSignature =  hash_hmac('sha256', $urlToSign, $password);
 
         $isValid = $object->validate($clientId, $requestSignature, $params);

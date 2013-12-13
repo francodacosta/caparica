@@ -82,6 +82,9 @@ class YamlClientProvider implements ClientProviderInterface
     private function yamlToArray($file, Yaml $loader)
     {
         $data = $loader->parse($file);
+        if (! $data) {
+            $data = [];
+        }
 
         return $data;
     }

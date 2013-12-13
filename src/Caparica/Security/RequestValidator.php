@@ -9,7 +9,7 @@ use Caparica\Crypto\SignerInterface;
  * Validates the request
  * make sure the request is signed and can be trusted
  */
-class RequestValidator
+class RequestValidator implements RequestValidatorInterface
 {
     /**
      * the api client provider
@@ -43,7 +43,6 @@ class RequestValidator
         $tolerance = $this->getTimestampTolerance();
         $currentTimestamp = date('U');
 
-
         $lowerBound = $currentTimestamp - $tolerance;
         $upperBound = $currentTimestamp + $tolerance;
 
@@ -69,7 +68,6 @@ class RequestValidator
         $timestampKey = $this->getTimestampKey();
 
         $client = $clientProvider->byCode($clientId);
-        $signedRequest = $requestSigner->sign($requestParameters, $client->getSecret());
 
 
         if (false === isset($requestParameters[$timestampKey])) {
@@ -78,8 +76,9 @@ class RequestValidator
 
         if (false === $this->validateTimestamp($requestParameters[$timestampKey])) {
             throw new \InvalidArgumentException('Your system clock is not synced, time difference too big', 403);
-
         }
+
+        $signedRequest = $requestSigner->sign($requestParameters, $client->getSecret());
 
         return $signature === $signedRequest;
     }
