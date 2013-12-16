@@ -1,7 +1,12 @@
-# caparica
-
+# Caparica
 
 Php library to validate and create signed requests
+
+
+> this is a low level library, you might want to check
+>   * [Caparica Bundle](https://github.com/francodacosta/caparica-bundle) a symfony2 bundle
+>   * [Caparica Guzzle](https://github.com/francodacosta/caparica-guzzle) a Guzzle plugin to automaticaly sign requests for you
+
 
 ## Installation
 
