@@ -55,7 +55,7 @@ class YamlClientProvider implements ClientProviderInterface
             }
         }
 
-        throw new \OutOfBoundsException('Client with code ' . $code . ' not found');
+        throw new \OutOfBoundsException('Client with code ' . $code . ' not found', 400);
     }
 
     /**
