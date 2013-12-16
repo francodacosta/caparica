@@ -17,6 +17,10 @@
         "symfony/yaml": "~2.2"
     },
 
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*"
+    },
+
     "autoload": {
         "psr-0": {
             "Caparica": "src/"

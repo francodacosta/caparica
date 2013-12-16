@@ -36,3 +36,4 @@ interface ClientInterface
     public function setSecret($secret);
 
 }
+

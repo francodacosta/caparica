@@ -55,3 +55,4 @@ class BasicClient implements ClientInterface
         return $this->code;
     }
 }
+
