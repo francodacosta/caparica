@@ -72,7 +72,6 @@ class YamlClientProvider implements ClientProviderInterface
 
         $client = new $clientClassName;
 
-        $client->setName($name);
         $client->setCode($data['code']);
         $client->setSecret($data['secret']);
 

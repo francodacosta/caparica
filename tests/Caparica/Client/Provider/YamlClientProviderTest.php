@@ -23,7 +23,6 @@ class YamlClientProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Caparica\Client\ClientInterface', $client);
         $this->assertEquals('1234', $client->getCode());
-        $this->assertEquals('client_name', $client->getName());
         $this->assertEquals('secret', $client->getSecret());
     }
 
