@@ -19,6 +19,7 @@ class RequestValidator implements RequestValidatorInterface
 
     private $timestampKey = 'X-CAPARICA-DATE';
     private $timestampTolerance = 600;
+    private $validateTimeStamp = true;
     /**
      * The request Signer
      * @var SignerInterface
@@ -70,12 +71,14 @@ class RequestValidator implements RequestValidatorInterface
         $client = $clientProvider->byCode($clientId);
 
 
-        if (false === isset($requestParameters[$timestampKey])) {
-            throw new \InvalidArgumentException("No timestamp found in request, please set " . $timestampKey, 400);
-        }
+        if ($this->getValidateTimeStamp()) {
+            if (false === isset($requestParameters[$timestampKey])) {
+                throw new \InvalidArgumentException("No timestamp found in request, please set " . $timestampKey, 400);
+            }
 
-        if (false === $this->validateTimestamp($requestParameters[$timestampKey])) {
-            throw new \InvalidArgumentException('Your system clock is not synced, time difference too big', 403);
+            if (false === $this->validateTimestamp($requestParameters[$timestampKey])) {
+                throw new \InvalidArgumentException('Your system clock is not synced, time difference too big', 403);
+            }
         }
 
         $signedRequest = $requestSigner->sign($requestParameters, $client->getSecret());
@@ -175,6 +178,30 @@ class RequestValidator implements RequestValidatorInterface
     public function setTimestampTolerance($timestampTolerance)
     {
         $this->timestampTolerance = $timestampTolerance;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of validateTimeStamp.
+     *
+     * @return mixed
+     */
+    public function getValidateTimeStamp()
+    {
+        return $this->validateTimeStamp;
+    }
+
+    /**
+     * Sets the value of validateTimeStamp.
+     *
+     * @param mixed $validateTimeStamp the validate time stamp
+     *
+     * @return self
+     */
+    public function setValidateTimeStamp($validateTimeStamp)
+    {
+        $this->validateTimeStamp = $validateTimeStamp;
 
         return $this;
     }
