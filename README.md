@@ -2,6 +2,7 @@
 
 Php library to validate and create signed requests
 
+[![Build Status](https://travis-ci.org/francodacosta/caparica.png?branch=master)](https://travis-ci.org/francodacosta/caparica)
 
 > this is a low level library, you might want to check
 >   * [Caparica Bundle](https://github.com/francodacosta/caparica-bundle) a symfony2 bundle
