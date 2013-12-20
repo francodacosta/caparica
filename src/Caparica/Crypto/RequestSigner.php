@@ -15,7 +15,7 @@ class RequestSigner implements SignerInterface
     public function sign (array $params, $password)
     {
         $string = $this->toParametersString($params);
-error_log('signing string: ' . $string);
+
         return hash_hmac('sha256', $string, $password);
     }
 

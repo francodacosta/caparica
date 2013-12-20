@@ -73,11 +73,15 @@ class RequestValidator implements RequestValidatorInterface
 
         if ($this->getValidateTimeStamp()) {
             if (false === isset($requestParameters[$timestampKey])) {
-                throw new \InvalidArgumentException("No timestamp found in request, please set " . $timestampKey, 400);
+                $msg = "No timestamp found in request, please set " . $timestampKey;
+                error_log('[CAPARICA] ' . $msg);
+                throw new \InvalidArgumentException($msg, 400);
             }
 
             if (false === $this->validateTimestamp($requestParameters[$timestampKey])) {
-                throw new \InvalidArgumentException('Your system clock is not synced, time difference too big', 403);
+                $msg = 'Your system clock is not synced, time difference too big';
+                error_log('[CAPARICA] ' . $msg);
+                throw new \InvalidArgumentException($msg, 400);
             }
         }
 
