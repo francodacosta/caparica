@@ -4,7 +4,8 @@ namespace Caparica\Security;
 
 use Caparica\Client\Provider\ClientProviderInterface;
 use Caparica\Crypto\SignerInterface;
-
+use Caparica\Exception\MissingTimestampException;
+use Caparica\Exception\OutOfSyncTimestampException;
 /**
  * Validates the request
  * make sure the request is signed and can be trusted
@@ -75,13 +76,13 @@ class RequestValidator implements RequestValidatorInterface
             if (false === isset($requestParameters[$timestampKey])) {
                 $msg = "No timestamp found in request, please set " . $timestampKey;
                 error_log('[CAPARICA] ' . $msg);
-                throw new \InvalidArgumentException($msg, 400);
+                throw new MissingTimestampException($msg, 400);
             }
 
             if (false === $this->validateTimestamp($requestParameters[$timestampKey])) {
                 $msg = 'Your system clock is not synced, time difference too big';
                 error_log('[CAPARICA] ' . $msg);
-                throw new \InvalidArgumentException($msg, 400);
+                throw new OutOfSyncTimestampException($msg, 400);
             }
         }
 
