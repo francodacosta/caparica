@@ -3,7 +3,7 @@
     "type": "library",
     "description": "secure your REST api with signed requests",
     "keywords": ["REST", "API", "secure", "hmac"],
-    "homepage": "",
+    "homepage": "https://github.com/francodacosta/caparica",
     "license": "MIT",
     "authors": [
         {
