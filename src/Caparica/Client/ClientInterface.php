@@ -1,4 +1,14 @@
 <?php
+/**
+ * Caparica
+ *
+ * Signed requests
+ *
+ * @author    Nuno Franco da Costa <nuno@francodacosta.com>
+ * @copyright 2013-2014 Nuno Franco da Costa
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/francodacosta/caparica
+ */
 
 namespace Caparica\Client;
 
@@ -17,7 +27,7 @@ interface ClientInterface
     /**
      * sets the API client code (AKA client id)
      *
-     * @return string
+     * @param string $code
      */
     public function setCode($code);
 
@@ -31,7 +41,7 @@ interface ClientInterface
     /**
      * sets the client secret
      *
-     * @return string
+     * @param string $secret
      */
     public function setSecret($secret);
 

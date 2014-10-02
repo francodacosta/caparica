@@ -1,4 +1,14 @@
 <?php
+/**
+ * Caparica
+ *
+ * Signed requests
+ *
+ * @author    Nuno Franco da Costa <nuno@francodacosta.com>
+ * @copyright 2013-2014 Nuno Franco da Costa
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/francodacosta/caparica
+ */
 
 namespace Caparica\Security;
 
@@ -18,8 +28,22 @@ class RequestValidator implements RequestValidatorInterface
      */
     private $clientProvider;
 
+    /**
+     * the key from the paramter array that identifies the timestamp
+     * @type String
+     */
     private $timestampKey = 'X-CAPARICA-DATE';
+
+    /**
+     * the ammount of seconds the timestamp can be out of sync with the server
+     * @type int
+     */
     private $timestampTolerance = 600;
+
+    /**
+     * should we validate the timestamp
+     * @type boolean
+     */
     private $validateTimeStamp = true;
     /**
      * The request Signer
@@ -27,6 +51,11 @@ class RequestValidator implements RequestValidatorInterface
      */
     private $requestSigner;
 
+    /**
+     * initiates the class.
+     *
+     * @param  SignerInterface $requestSigner
+     */
     public function __construct(SignerInterface $requestSigner)
     {
         $this->setRequestSigner($requestSigner);

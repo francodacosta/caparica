@@ -1,4 +1,15 @@
 <?php
+/**
+ * Caparica
+ *
+ * Signed requests
+ *
+ * @author    Nuno Franco da Costa <nuno@francodacosta.com>
+ * @copyright 2013-2014 Nuno Franco da Costa
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/francodacosta/caparica
+ */
+
 namespace Caparica\Client\Provider;
 
 use Caparica\Client\ClientInterface;
@@ -9,17 +20,18 @@ use Caparica\Client\ClientInterface;
 class ArrayClientProvider  extends AbstractClientProvider implements ClientProviderInterface
 {
     /**
+     * holds the code => secret pairs registred with this provider
      * @type array
      * @private
      */
     private $config = [];
 
-    // /**
-    //  * The client class name
-    //  * @type string
-    //  */
-    // private $clientClassName = 'Caparica\Client\BasicClient';
-
+    /**
+     * initiates the class
+     *
+     * @param  array  $config          an optional associative array of codes => secret to populate the provider
+     * @param  string $clientClassName the FQCN for the client clas
+     */
     public function __construct (array $config = [], $clientClassName = null)
     {
         if (null !== $config) {
@@ -34,7 +46,11 @@ class ArrayClientProvider  extends AbstractClientProvider implements ClientProvi
     }
 
     /**
-     * @{inheritdoc}
+     * Returns a client by looking up its code
+     *
+     * @param string $code the client code
+     *
+     * @return ClientInterface
      */
     public function getByClientCode($code)
     {
@@ -86,7 +102,7 @@ class ArrayClientProvider  extends AbstractClientProvider implements ClientProvi
     /**
      * Set the value of Config
      *
-     * @param array config
+     * @param array $value
      *
      * @return self
      */
@@ -96,41 +112,5 @@ class ArrayClientProvider  extends AbstractClientProvider implements ClientProvi
 
         return $this;
     }
-
-
-    // /**
-    //  * Get the value of The client class name
-    //  *
-    //  * @return string
-    //  */
-    // public function getClientClassName()
-    // {
-    //     return $this->clientClassName;
-    // }
-    //
-    // /**
-    //  * Set the value of The client class name
-    //  *
-    //  * @param string className
-    //  *
-    //  * @return self
-    //  */
-    // public function setClientClassName($value)
-    // {
-    //
-    //     if (false === class_exists($value)) {
-    //         throw new \UnexpectedValueException($value . ' class does not exists');
-    //     }
-    //
-    //     $class = new $value;
-    //
-    //     if (false === $class instanceof ClientInterface ) {
-    //         throw new \UnexpectedValueException($value . ' class does not implement ClientInterface');
-    //     }
-    //
-    //     $this->clientClassName = $value;
-    //
-    //     return $this;
-    // }
 
 }
