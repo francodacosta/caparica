@@ -12,7 +12,7 @@ Php library to validate and create signed requests
 
 ### Api docs
 
->   * the latest api docs can be found [here]
+>   * the latest api docs can be found [here](docs/ApiIndex.md)
 
 
 ## Installation
