@@ -2,7 +2,7 @@
 
 namespace Caparica\Security;
 
-use Caparica\Client\Provider\ClientProviderInterface;
+use Caparica\Client\ClientInterface;
 use Caparica\Crypto\SignerInterface;
 
 /**
@@ -17,14 +17,14 @@ Interface RequestValidatorInterface
      * Validates an request.
      * this function makes sure the request signature matches the one we calculated
      *
-     * @param  string  $clientId          the id of the api client
-     * @param  string  $signature         the request signature
-     * @param  array   $requestParameters parameters from the request (query string + headers)
-     * @param  integer $version           the signature version
+     * @param  ClientInterface  $client              the id of the api client
+     * @param  string           $signatureToValidate the request signature
+     * @param  array            $requestParameters   parameters from the request (query string + headers)
+     * @param  integer          $version             the signature version
      *
      * @return boolean
      */
-    public function validate($clientId, $signature, $requestParameters, $version = 1);
+    public function validate(ClientInterface $client, $signatureToValidate, $requestParameters, $version = 1);
 
     /**
      * Sets the value of timestampKey.

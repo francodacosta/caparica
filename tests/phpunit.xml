@@ -19,8 +19,16 @@
     </php>
 
     <testsuites>
-        <testsuite name="caparica tests">
+        <testsuite name="all">
             <directory>./Caparica</directory>
+        </testsuite>
+
+        <testsuite name="client">
+            <directory>./Caparica/Client</directory>
+        </testsuite>
+
+        <testsuite name="client">
+            <directory>./Caparica/Crypto</directory>
         </testsuite>
     </testsuites>
 

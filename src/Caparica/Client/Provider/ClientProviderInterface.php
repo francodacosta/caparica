@@ -15,5 +15,20 @@ interface ClientProviderInterface
      *
      * @return ClientInterface
      */
-    public function byCode($code);
+    public function getByClientCode($code);
+
+    /**
+     * sets the Fully Qualifiyed Class Name of the class to return
+     * The returned class should implement the ClientInterface
+     *
+     * @param string $fqdn
+     */
+    public function setClientClassName($clientClassName);
+
+    /**
+     * gets the Fully Qualifiyed Class Name of the class to return
+     *
+     * @param string
+     */
+    public function getClientClassName();
 }

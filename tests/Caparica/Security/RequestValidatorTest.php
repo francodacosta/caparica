@@ -2,23 +2,15 @@
 
 use Caparica\Security\RequestValidator;
 use Caparica\Crypto\RequestSigner;
-use Caparica\Client\Provider\YamlClientProvider;
-use Symfony\Component\Yaml\Yaml;
+use Caparica\Client\BasicClient;
 
 class RequestValidatorTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp()
     {
-        $file = __DIR__ . '/../../fixtures/api-clients.yml';
-        $yaml = new Symfony\Component\Yaml\Yaml;
-        $class = 'Caparica\Client\BasicClient';
 
-        $clientProvider = new YamlClientProvider($file, $yaml, $class);
-
-        $requestSigner = '';
-
-        $requestValidator = new RequestValidator($clientProvider, new RequestSigner);
+        $requestValidator = new RequestValidator(new RequestSigner);
 
         $this->obj = $requestValidator;
     }
@@ -46,6 +38,10 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
         $password = 'secret';
         $clientId = '1234';
 
+        $client = new BasicClient;
+        $client->setCode($clientId);
+        $client->setSecret($password);
+
         $timestamp = date('U');
         $params = array(
             'X-CAPARICA-DATE' => $timestamp,
@@ -57,39 +53,40 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
         $urlToSign = 'a=bcd&b=ewq&c=123&X-CAPARICA-DATE='. $timestamp;
         $requestSignature =  hash_hmac('sha256', $urlToSign, $password);
 
-        $isValid = $object->validate($clientId, $requestSignature, $params);
+        $isValid = $object->validate($client, $requestSignature, $params);
 
         $this->assertTrue($isValid);
     }
 
-    /**
-     * @expectedException OutOfBoundsException
-     */
-    public function testValidSignature_INVALID_CLIENT()
+    public function testInvalidSignature()
     {
         $object =  $this->obj;
 
-        // see fixtures/api-clients.yml for values
         $password = 'secret';
-        $clientId = '123442342342';
+
+        $client = new BasicClient;
+        $client->setCode('1');
+        $client->setSecret('2');
+
+        $timestamp = date('U');
 
         $params = array(
-            'X-CAPARICA-DATE' =>'20130101092356',
+            'X-CAPARICA-DATE' => $timestamp,
             'a'               => 'bcd',
             'c'               => '123',
             'b'               => 'ewq',
         );
 
-        $urlToSign = 'a=bcd&b=ewq&c=123&X-CAPARICA-DATE=20130101092356';
+        $urlToSign = 'a=bcd&b=ewq&c=123&X-CAPARICA-DATE=' . $timestamp;
         $requestSignature =  hash_hmac('sha256', $urlToSign, $password);
 
 
-        $isValid = $object->validate($clientId, $requestSignature, $params);
+        $isValid = $object->validate($client, $requestSignature, $params);
 
+        $this->assertFalse($isValid);
     }
     /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionCode 403
+     * @expectedException Caparica\Exception\OutOfSyncTimestampException
      */
     public function testValidSignature_INVALID_TIMESTAMP()
     {
@@ -98,6 +95,9 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
         // see fixtures/api-clients.yml for values
         $password = 'secret';
         $clientId = '1234';
+        $client = new BasicClient;
+        $client->setCode($clientId);
+        $client->setSecret($password);
 
         $params = array(
             'X-CAPARICA-DATE' =>'20130101092356',
@@ -110,12 +110,11 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
         $requestSignature =  hash_hmac('sha256', $urlToSign, $password);
 
 
-        $isValid = $object->validate($clientId, $requestSignature, $params);
+        $isValid = $object->validate($client, $requestSignature, $params);
 
     }
     /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionCode 400
+     * @expectedException Caparica\Exception\MissingTimestampException
      */
     public function testValidSignature_NO_TIMESTAMP()
     {
@@ -124,6 +123,9 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
         // see fixtures/api-clients.yml for values
         $password = 'secret';
         $clientId = '1234';
+        $client = new BasicClient;
+        $client->setCode($clientId);
+        $client->setSecret($password);
 
         $params = array(
             'a'               => 'bcd',
@@ -135,7 +137,36 @@ class RequestValidatorTest extends \PHPUnit_Framework_TestCase
         $requestSignature =  hash_hmac('sha256', $urlToSign, $password);
 
 
-        $isValid = $object->validate($clientId, $requestSignature, $params);
+        $isValid = $object->validate($client, $requestSignature, $params);
+
+    }
+
+
+    /**
+     * because we say we do not validate the TS so not having a timestamp should be ok
+     */
+    public function testValidSignature_NO_TIMESTAMP_DO_NOT_CHECK_TS_FLAG()
+    {
+        $object =  $this->obj;
+
+        // see fixtures/api-clients.yml for values
+        $password = 'secret';
+        $clientId = '1234';
+        $client = new BasicClient;
+        $client->setCode($clientId);
+        $client->setSecret($password);
+
+        $params = array(
+            'a'               => 'bcd',
+            'c'               => '123',
+            'b'               => 'ewq',
+        );
+
+        $urlToSign = 'a=bcd&b=ewq&c=123&X-CAPARICA-DATE=20130101092356';
+        $requestSignature =  hash_hmac('sha256', $urlToSign, $password);
+
+        $object->setValidateTimestamp(false);
+        $isValid = $object->validate($client, $requestSignature, $params);
 
     }
 }

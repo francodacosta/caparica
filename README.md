@@ -30,7 +30,7 @@ The request is signed this way:
   2. produce a string in the form of ```param-1=value-1&...&param-N=value-N```
   3. create the signature by hasing the string using the secret code
   4. make the request to the server and pass the hash signature
-  
+
 The server will repeat the process and compare the signatures.
 
 To avoid replay atacks you should include the current timestamp in the signature, Caparica can handle that for you
@@ -74,15 +74,9 @@ $signature = $signer->sign($params, $password);
 
 ### Validate a request
 ```php
-$file ='api-clients.yml';
-$yaml = new Symfony\Component\Yaml\Yaml;
-$returnClassName = 'Caparica\Client\BasicClient';
+$client = new BasicClient;
 
-// this client provider will fetch client information from an YAML file
-// the return object will be of type $returnClassName
-$clientProvider = new YamlClientProvider($file, $yaml, $returnClassName);
-
-$requestValidator = new RequestValidator($clientProvider, new RequestSigner);
+$requestValidator = new RequestValidator(new RequestSigner);
 
 // this values come from the request the client made
 // use whatever methods your framework has to access http requests
@@ -93,16 +87,12 @@ $requestParams = array(
     'b'               => 'ewq',
 );
 
+// the signature comes from the request, we will use it to compare with the server
+// generated one, if they match we know the request is valid
 $requestSignature = '0c6513e432bb25d8be659a99ca240a64f60dee875e04d557341a677bfe08a1bf';
-$clientId = 'client-id';
-  
-// or
-// $requestParams = $_GET;
-// unset($requestParams['signature']);
-// $requestSignature = $_GET['signature'];;
-// $clientId = $?GET['client-code'];
 
-$isValid = $object->validate($clientId, $requestSignature, $params);
 
-        
+$isValid = $object->validate($client, $requestSignature, $params);
+
+
 ```
