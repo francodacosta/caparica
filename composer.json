@@ -21,6 +21,10 @@
         "evert/phpdoc-md" : "~0.0.7"
     },
 
+    "suggest": {
+        "doctrine/orm": "to use the doctrine client provider"
+    },
+
     "autoload": {
         "psr-0": {
             "Caparica": "src/"
