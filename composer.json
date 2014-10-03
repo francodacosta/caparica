@@ -22,7 +22,8 @@
     },
 
     "suggest": {
-        "doctrine/orm": "to use the doctrine client provider"
+        "doctrine/orm": "to use the DOCTRINE client provider",
+        "symfony/yaml": "to use the YAML client provider"
     },
 
     "autoload": {
