@@ -9,6 +9,8 @@ API Index
             * [AbstractClientProvider](Caparica-Client-Provider-AbstractClientProvider.md)
             * [ArrayClientProvider](Caparica-Client-Provider-ArrayClientProvider.md)
             * [ClientProviderInterface](Caparica-Client-Provider-ClientProviderInterface.md)
+            * [DoctrineClientProvider](Caparica-Client-Provider-DoctrineClientProvider.md)
+            * [YamlClientProvider](Caparica-Client-Provider-YamlClientProvider.md)
     * Caparica\Crypto
         * [RequestSigner](Caparica-Crypto-RequestSigner.md)
         * [SignerInterface](Caparica-Crypto-SignerInterface.md)
