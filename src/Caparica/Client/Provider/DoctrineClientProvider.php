@@ -1,5 +1,5 @@
 <?php
-namespace Francodacosta\CaparicaBundle\Client\Provider;
+namespace Caparica\Client\Provider;
 
 use Caparica\Client\Provider\ClientProviderInterface;
 use Caparica\Client\Provider\AbstractClientProvider;

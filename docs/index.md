@@ -8,6 +8,7 @@ Caparica works in the same way. We check your Client ID and compare the Signatur
 
 
 * Undestanding Signed Requests
+    * [Rationale](static/understand/rationale.md)
     * [Client ID and Client Secret](static/understand/clientid.md)
     * [Request Validation](static/understand/request-validation.md)
 * Api docs
