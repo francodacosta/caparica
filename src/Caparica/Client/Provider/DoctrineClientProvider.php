@@ -148,7 +148,7 @@ class DoctrineClientProvider extends AbstractClientProvider implements ClientPro
     /**
      * {@inheritdoc}
      */
-    public function byClientCode($code)
+    public function getByClientCode($code)
     {
         $em = $this->getEntityManager();
         $repo = $em->getRepository($this->getEntityClass());

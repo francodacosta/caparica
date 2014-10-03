@@ -23,19 +23,12 @@
             <directory>./Caparica</directory>
         </testsuite>
 
-        <testsuite name="client">
-            <directory>./Caparica/Client</directory>
-        </testsuite>
-
-        <testsuite name="client">
-            <directory>./Caparica/Crypto</directory>
-        </testsuite>
     </testsuites>
 
 
     <filter>
     <blacklist>
-        <directory suffix="Interface.php">./Caparica</directory>
+        <directory suffix=".php">../vendor</directory>
     </blacklist>
 
 </filter>
