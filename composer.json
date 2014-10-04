@@ -12,13 +12,19 @@
             "homepage": "http://www.francodacosta.com"
         }
     ],
+
     "require": {
-        "php": ">=5.3.0",
-        "symfony/yaml": "~2.2"
+        "php": ">=5.3.0"
     },
 
     "require-dev": {
-        "phpdocumentor/phpdocumentor": "2.*"
+        "phpdocumentor/phpdocumentor": "2.*",
+        "evert/phpdoc-md" : "~0.0.7"
+    },
+
+    "suggest": {
+        "doctrine/orm": "to use the DOCTRINE client provider",
+        "symfony/yaml": "to use the YAML client provider"
     },
 
     "autoload": {

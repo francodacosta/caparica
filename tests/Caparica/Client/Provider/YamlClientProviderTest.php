@@ -19,7 +19,7 @@ class YamlClientProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testByCode()
     {
-        $client = $this->provider->byCode('1234');
+        $client = $this->provider->getByClientCode('1234');
 
         $this->assertInstanceOf('Caparica\Client\ClientInterface', $client);
         $this->assertEquals('1234', $client->getCode());
@@ -31,7 +31,7 @@ class YamlClientProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testByCode_notFound()
     {
-        $client = $this->provider->byCode(time());
+        $client = $this->provider->getByClientCode(time());
     }
 
     /**
@@ -44,6 +44,6 @@ class YamlClientProviderTest extends \PHPUnit_Framework_TestCase
         $class = 'Caparica\Client\BasicClient';
 
         $provider = new YamlClientProvider($file, $yaml, $class );
-        $client = $provider->byCode(time());
+        $client = $provider->getByClientCode(time());
     }
 }

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Caparica
+ *
+ * Signed requests
+ *
+ * @author    Nuno Franco da Costa <nuno@francodacosta.com>
+ * @copyright 2013-2014 Nuno Franco da Costa
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/francodacosta/caparica
+ */
 
 namespace Caparica\Client\Provider;
 
@@ -8,7 +18,7 @@ use Caparica\Client\ClientInterface;
 /**
  * Locates clients in an yml file
  */
-class YamlClientProvider implements ClientProviderInterface
+class YamlClientProvider extends AbstractClientProvider implements ClientProviderInterface
 {
     /**
      * parsed yml data
@@ -28,13 +38,6 @@ class YamlClientProvider implements ClientProviderInterface
      */
     private $ymlLoader;
 
-    /**
-     * Name of Client class to return, the class must implement ClientInterface
-     *
-     * @var string
-     */
-    private $clientClassName;
-
     public function __construct($file, Yaml $ymlLoader, $clientClassName)
     {
         $this->setFile(new \SplFileInfo($file));
@@ -45,7 +48,7 @@ class YamlClientProvider implements ClientProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function byCode($code)
+    public function getByClientCode($code)
     {
         $data = $this->getData();
         foreach ($data as $clientName => $clientData) {
@@ -155,27 +158,4 @@ class YamlClientProvider implements ClientProviderInterface
         return $this;
     }
 
-    /**
-     * Gets the Name of Client class to return, the class must implement Clientinterface.
-     *
-     * @return string
-     */
-    private function getClientClassName()
-    {
-        return $this->clientClassName;
-    }
-
-    /**
-     * Sets the Name of Client class to return, the class must implement Clientinterface.
-     *
-     * @param string $clientClassName the clientClassName
-     *
-     * @return self
-     */
-    private function setClientClassName($clientClassName)
-    {
-        $this->clientClassName = $clientClassName;
-
-        return $this;
-    }
 }

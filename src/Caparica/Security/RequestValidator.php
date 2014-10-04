@@ -1,8 +1,18 @@
 <?php
+/**
+ * Caparica
+ *
+ * Signed requests
+ *
+ * @author    Nuno Franco da Costa <nuno@francodacosta.com>
+ * @copyright 2013-2014 Nuno Franco da Costa
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/francodacosta/caparica
+ */
 
 namespace Caparica\Security;
 
-use Caparica\Client\Provider\ClientProviderInterface;
+use Caparica\Client\ClientInterface;
 use Caparica\Crypto\SignerInterface;
 use Caparica\Exception\MissingTimestampException;
 use Caparica\Exception\OutOfSyncTimestampException;
@@ -18,8 +28,22 @@ class RequestValidator implements RequestValidatorInterface
      */
     private $clientProvider;
 
+    /**
+     * the key from the paramter array that identifies the timestamp
+     * @type String
+     */
     private $timestampKey = 'X-CAPARICA-DATE';
+
+    /**
+     * the ammount of seconds the timestamp can be out of sync with the server
+     * @type int
+     */
     private $timestampTolerance = 600;
+
+    /**
+     * should we validate the timestamp
+     * @type boolean
+     */
     private $validateTimeStamp = true;
     /**
      * The request Signer
@@ -27,9 +51,13 @@ class RequestValidator implements RequestValidatorInterface
      */
     private $requestSigner;
 
-    public function __construct(ClientProviderInterface $clientProvider, SignerInterface $requestSigner)
+    /**
+     * initiates the class.
+     *
+     * @param  SignerInterface $requestSigner
+     */
+    public function __construct(SignerInterface $requestSigner)
     {
-        $this->setClientProvider($clientProvider);
         $this->setRequestSigner($requestSigner);
     }
 
@@ -48,29 +76,26 @@ class RequestValidator implements RequestValidatorInterface
         $lowerBound = $currentTimestamp - $tolerance;
         $upperBound = $currentTimestamp + $tolerance;
 
+        error_log($timestamp . ' lb:' . $lowerBound . ' ub: '. $upperBound);
         return  $timestamp > $lowerBound &&  $timestamp < $upperBound;
     }
 
     /**
-     * Validates an request.
-     * this function makes sure the request signature matches the one we calculated
-     *
-     * @param  string  $clientId          the id of the api client
-     * @param  string  $signature         the request signature
-     * @param  array   $requestParameters parameters from the request (query string + headers)
-     * @param  integer $version           the signature version
-     *
-     * @return boolean
-     */
-    public function validate($clientId, $signature, $requestParameters, $version = 1)
+      * Validates an request.
+      * this function makes sure the request signature matches the one we calculated
+      *
+      * @param  ClientInterface  $client              the id of the api client
+      * @param  string           $signatureToValidate the request signature
+      * @param  array            $requestParameters   parameters from the request (query string + headers)
+      * @param  integer          $version             the signature version
+      *
+      * @return boolean
+      */
+    public function validate(ClientInterface $client, $signatureToValidate, $requestParameters, $version = 1)
     {
 
-        $clientProvider = $this->getClientProvider();
         $requestSigner = $this->getRequestSigner();
-        $timestampKey = $this->getTimestampKey();
-
-        $client = $clientProvider->byCode($clientId);
-
+        $timestampKey  = $this->getTimestampKey();
 
         if ($this->getValidateTimeStamp()) {
             if (false === isset($requestParameters[$timestampKey])) {
@@ -88,31 +113,7 @@ class RequestValidator implements RequestValidatorInterface
 
         $signedRequest = $requestSigner->sign($requestParameters, $client->getSecret());
 
-        return $signature === $signedRequest;
-    }
-
-    /**
-     * Gets the the api client provider.
-     *
-     * @return ClientProviderInterface
-     */
-    private function getClientProvider()
-    {
-        return $this->clientProvider;
-    }
-
-    /**
-     * Sets the the api client provider.
-     *
-     * @param ClientProviderInterface $clientProvider the clientProvider
-     *
-     * @return self
-     */
-    private function setClientProvider(ClientProviderInterface $clientProvider)
-    {
-        $this->clientProvider = $clientProvider;
-
-        return $this;
+        return $signatureToValidate === $signedRequest;
     }
 
     /**
