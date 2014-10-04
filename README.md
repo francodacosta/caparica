@@ -17,12 +17,12 @@ composer.phar require francodacosta/caparica
 ```
 
 ### Documentation
->  Please Be sure to read the documentation, make sure you understand the client and server parts of Caparica.
+>  Please be sure to read the documentation, make sure you understand the client and server parts of Caparica.
 >
 >  The latest documentation can be found on the [docs folder](docs/index.md)
 
 
-## Sign a request
+## Sign a request _(on the client)_
 
 ```php
 use Caparica\Crypto\RequestSigner;
@@ -40,7 +40,7 @@ $signature = $signer->sign($params, $password);
 
 ```
 
-### Validate a request
+### Validate a request _(on the server)_
 ```php
 $client = new BasicClient;
 
