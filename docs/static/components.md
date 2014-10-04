@@ -4,7 +4,7 @@
 ## Components
 Caparica has 3 main components
 
-  * [Caparica Client]((../api/Caparica-Client-BasicClient.md))
+  * [Caparica Client]((../api/Caparica-Client-BasicClient.md)
   * [Request Signer](../api/Caparica-Crypto-RequestSigner.md)
   * [Request Validator](../api/Caparica-Security-RequestValidator.md)
 
