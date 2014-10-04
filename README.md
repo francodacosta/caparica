@@ -22,7 +22,7 @@ composer.phar require francodacosta/caparica
 >  The latest documentation can be found on the [docs folder](docs/index.md)
 
 
-## Sign a request _(on the client)_
+## Sign a request _(client side)_
 
 ```php
 use Caparica\Crypto\RequestSigner;
@@ -40,7 +40,7 @@ $signature = $signer->sign($params, $password);
 
 ```
 
-### Validate a request _(on the server)_
+### Validate a request _(server side)_
 ```php
 $client = new BasicClient;
 
