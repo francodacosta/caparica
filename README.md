@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/francodacosta/caparica.png?branch=master)](https://travis-ci.org/francodacosta/caparica)
+# Caparica  [![Build Status](https://travis-ci.org/francodacosta/caparica.png?branch=master)](https://travis-ci.org/francodacosta/caparica)
 [![Total Downloads](https://poser.pugx.org/francodacosta/caparica/downloads.svg)](https://packagist.org/packages/francodacosta/caparica)
 [![Latest Stable Version](https://poser.pugx.org/francodacosta/caparica/v/stable.svg)](https://packagist.org/packages/francodacosta/caparica)
 
-# Caparica 
+
 
 _Php library to validate and create signed requests_
 
