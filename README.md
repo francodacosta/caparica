@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/francodacosta/caparica.png?branch=master)](https://travis-ci.org/francodacosta/caparica) [![Latest Stable Version](https://poser.pugx.org/francodacosta/caparica/v/stable.svg)](https://packagist.org/packages/francodacosta/caparica) [![Total Downloads](https://poser.pugx.org/francodacosta/caparica/downloads.svg)](https://packagist.org/packages/francodacosta/caparica) [![Latest Unstable Version](https://poser.pugx.org/francodacosta/caparica/v/unstable.svg)](https://packagist.org/packages/francodacosta/caparica) [![License](https://poser.pugx.org/francodacosta/caparica/license.svg)](https://packagist.org/packages/francodacosta/caparica)
+[![Build Status](https://travis-ci.org/francodacosta/caparica.png?branch=master)](https://travis-ci.org/francodacosta/caparica)
+[![Total Downloads](https://poser.pugx.org/francodacosta/caparica/downloads.svg)](https://packagist.org/packages/francodacosta/caparica)
+[![Latest Stable Version](https://poser.pugx.org/francodacosta/caparica/v/stable.svg)](https://packagist.org/packages/francodacosta/caparica)
 
 # Caparica 
 
