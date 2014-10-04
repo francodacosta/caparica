@@ -17,7 +17,8 @@ composer.phar require francodacosta/caparica
 ```
 
 ### Documentation
->  Please Be sure to read the documentation, make sure you understand the client and server parts of Caparica
+>  Please Be sure to read the documentation, make sure you understand the client and server parts of Caparica.
+>
 >  The latest documentation can be found [here](docs/index.md)
 
 
