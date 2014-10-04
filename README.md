@@ -10,56 +10,16 @@ Php library to validate and create signed requests
 >   * [Caparica Bundle](https://github.com/francodacosta/caparica-bundle) a symfony2 bundle
 >   * [Caparica Guzzle](https://github.com/francodacosta/caparica-guzzle-plugin) a Guzzle plugin to automatically sign requests for you
 
-### Documentation
-
-   The latest documentation can be found [here](docs/index.md)
-
-
 ## Installation
 
 ```
 composer.phar require francodacosta/caparica
 ```
 
-## How does it work ?
-Signing a request is a way for a client to identify itself, much the same way when you sign a cheque.
+### Documentation
+>  Please Be sure to read the documentation, make sure you understand the client and server parts of Caparica
+>  The latest documentation can be found [here](docs/index.md)
 
-The client and the server both know a secret code, that code is used by the client to create a signature and the server uses that code to verify the request. The secret code itself is never sent and is the only thing that must be kept secret.
-
-The request is signed this way:
-  1. sort all parameters sent in the request
-  2. produce a string in the form of ```param-1=value-1&...&param-N=value-N```
-  3. create the signature by hasing the string using the secret code
-  4. make the request to the server and pass the hash signature
-
-The server will repeat the process and compare the signatures.
-
-To avoid replay atacks you should include the current timestamp in the signature, Caparica can handle that for you
-
-## Caparica Components
-Caparica has 3 main components
-
-  * Caparica Client
-  * Request Signer
-  * Request Validator
-
-### Caparica Client
-The client is an object that represents the client making the request, it holds the ```client code``` and the ```client secret```.
-The code is usaly passed as a parameter in the url, based on the client code the servel will know what secret to use when validating the request.
-
-You may want to use the ```ClientProvider``` those will help you to fetch client information from a data source
-
-__CLIENT PROVIDERS___
-currently caparica supports the following client providers
-* [Array Provider](docs/api/Caparica-Client-Provider-ArrayClientProvider.md)
-* [Yaml Provider](docs/api/Caparica-Client-Provider-YamlClientProvider.md)
-* [Doctrine Provider](docs/api/Caparica-Client-Provider-DoctrineClientProvider.md)
-
-### Request Signer
-This is the component that will sign the request, is accepts an associative array with the parameter/value combinations
-
-### Request Validator
-Only used in the server, it will match the signature in the request with one computed internally, if they match the request is authentic
 
 ## Sign a request
 
