@@ -42,6 +42,9 @@ $signature = $signer->sign($params, $password);
 
 ### Validate a request _(server side)_
 ```php
+use Caparica\Security\RequestValidator;
+use Caparica\Client\BasicClient;
+
 $client = new BasicClient;
 
 $requestValidator = new RequestValidator(new RequestSigner);
@@ -60,7 +63,7 @@ $requestParams = array(
 $requestSignature = '0c6513e432bb25d8be659a99ca240a64f60dee875e04d557341a677bfe08a1bf';
 
 
-$isValid = $object->validate($client, $requestSignature, $params);
+$isValid = $requestValidator->validate($client, $requestSignature, $requestParams);
 
 
 ```
